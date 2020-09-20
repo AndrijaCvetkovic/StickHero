@@ -114,7 +114,7 @@ public class GameplayController : MonoBehaviour
         while (Mathf.Abs(posEnd.x - player.transform.position.x) >= 0.1f)
         {
             yield return new WaitForEndOfFrame();
-            player.transform.position = Vector3.Lerp(player.transform.position, posEnd, 0.1f);
+            player.transform.position = Vector3.Lerp(player.transform.position, posEnd, 0.03f);
         }
         player.transform.position = posEnd;
         Destroy(lastGreatedStick);
