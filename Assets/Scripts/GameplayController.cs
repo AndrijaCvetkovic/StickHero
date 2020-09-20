@@ -111,10 +111,25 @@ public class GameplayController : MonoBehaviour
         posEnd = new Vector3(posEnd.x ,player.transform.position.y, 0);
 
         //while (Mathf.Abs(posEnd.x - player.transform.position.x) >= 0.2f)
+        float dist = Vector2.Distance(posEnd, player.transform.position);
         while (Mathf.Abs(posEnd.x - player.transform.position.x) >= 0.1f)
         {
             yield return new WaitForEndOfFrame();
-            player.transform.position = Vector3.Lerp(player.transform.position, posEnd, 0.03f);
+            if (dist / 3 < Mathf.Abs(posEnd.x - player.transform.position.x))
+            {
+                player.transform.position = Vector3.Lerp(player.transform.position, posEnd, 0.03f);
+                Debug.Log("1");
+            }
+            else if (dist * 2 / 3 < Mathf.Abs(posEnd.x - player.transform.position.x))
+            {
+                player.transform.position = Vector3.Lerp(player.transform.position, posEnd, 0.04f);
+                Debug.Log("2");
+            }
+            else
+            {
+                player.transform.position = Vector3.Lerp(player.transform.position, posEnd, 0.05f);
+                Debug.Log("3");
+            }
         }
         player.transform.position = posEnd;
         Destroy(lastGreatedStick);
